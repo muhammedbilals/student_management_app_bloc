@@ -36,41 +36,56 @@ class _DetailsState extends State<Details> {
   Widget build(BuildContext context) {
     // StudentDetails(studentdata);
     print(studentdata);
-    return Container(
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: Text('students'),
+          title: const Text('Student Details'),
         ),
-        body: Column(
+        body: Center(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: CircleAvatar(
+                        radius: 100,
+                      ),
+                 ),
+                  ListTile(
+                    leading: Text(
+                        style: TextStyle(
+                          fontSize: 23,
+                        ),
+                        "Name : ${widget.data.name}"),
+                    // title: Text('${passValue.name}'),
+                  ),
+                  ListTile(
+                    leading: Text(
+                        style: TextStyle(fontSize: 23),
+                        "Age : ${widget.data.age}"),
+                  ),
+                  ListTile(
+                    leading: Text(
+                        style: TextStyle(
+                          fontSize: 23,
+                        ),
+                        "Domain : ${widget.data.domain}"),
+                  ),
+                  ListTile(
+                    leading: Text(
+                        style: TextStyle(
+                          fontSize: 23,
+                        ),
+                        "Phone Number : ${widget.data.Number}"),
+                  ),
 
-          children: [
-            // Image.file(image!,width: 160,height: 160,),
-            // ElevatedButton(
-            //     onPressed: () {
-            //       pickImage();
-            //     },
-                // child: Icon(Icons.camera_alt_outlined)),
-            Center(
-              child: Container(
-                width: 1120,
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.amber),
-                child: Column(
-                  children: [
-                    Text('Name:${widget.data.name}'),
-                    Text('Age:${widget.data.age}'),
-                    Text('Domain:${widget.data.domain}'),
-                    Text('Number:${widget.data.Number}'),
-                  ],
-                ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
-
 // Future<StudentModel?> StudentDetails(index) async {
 //   final studentDB = await Hive.openBox<StudentModel>('student_db');
 //   final studentdata = studentDB.getAt(index);
@@ -78,3 +93,7 @@ class _DetailsState extends State<Details> {
 // }
 
 }
+//  Text('Name:${widget.data.name}'),
+//                     Text('Age:${widget.data.age}'),
+//                     Text('Domain:${widget.data.domain}'),
+//                     Text('Number:${widget.data.Number}'),

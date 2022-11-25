@@ -15,23 +15,23 @@
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: Container(
-//           decoration: BoxDecoration(
-//             color: Colors.blue.shade100,
-//             borderRadius: BorderRadius.circular(30),
-//           ),
-//           child: TextField(
-//             onChanged: (value) {},
-//             controller: _textEditingController,
-//             decoration: InputDecoration(
-//                 border: InputBorder.none,
-//                 errorBorder: InputBorder.none,
-//                 focusedBorder: InputBorder.none,
-//                 contentPadding: EdgeInsets.all(15),
-//                 hintText: 'search'),
-//           ),
-//         ),
-//       ),
+      //   title: Container(
+      //     decoration: BoxDecoration(
+      //       color: Colors.blue.shade100,
+      //       borderRadius: BorderRadius.circular(30),
+      //     ),
+      //     child: TextField(
+      //       onChanged: (value) {},
+      //       controller: _textEditingController,
+      //       decoration: InputDecoration(
+      //           border: InputBorder.none,
+      //           errorBorder: InputBorder.none,
+      //           focusedBorder: InputBorder.none,
+      //           contentPadding: EdgeInsets.all(15),
+      //           hintText: 'search'),
+      //     ),
+      //   ),
+      // ),
 //       body: ValueListenableBuilder(
 //         valueListenable: StudentListNotifier,
 //         builder:
@@ -101,35 +101,37 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color.fromRGBO(254, 245, 237, 1),
       appBar: AppBar(
-        // backgroundColor: const Color.fromRGBO(173, 194, 169, 1),
-        // title: const Text("Search Students"),
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.blue.shade100,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: TextField(
+            onChanged: (value) {
+                  searchStudentList(value);
+                },
+            
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                errorBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                contentPadding: EdgeInsets.all(15),
+                hintText: 'search'),
+                controller: _searchController,
+          ),
+        ),
       ),
+                 
+                
+                
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 5,bottom: 7),
-              child: TextField(decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    // InputBorder(borderSide:BorderSide(width: 1)),
-                    //
-                    // labelText: 'Name',
-                    hintText: 'Search'
-                  ),
-                // validator: (value) {
-                //   return;
-                // },
-                // icon: Icons.search,
-                // hin
-                // hintText: "Search Names",
-                controller: _searchController,
-                onChanged: (value) {
-                  searchStudentList(value);
-                },
-              ),
+              
             ),
             Expanded(
               child: (displayStudent.length != 0)
