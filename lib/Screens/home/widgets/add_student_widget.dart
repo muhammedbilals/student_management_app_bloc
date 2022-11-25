@@ -34,14 +34,16 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
           child: Column(
             children: [
               CircleAvatar(
-                // backgroundImage:Image.asset(/assets/person-4.png),
+                backgroundColor: Colors.grey.shade400,
+                backgroundImage: NetworkImage('https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/person-4.png'),
                 radius: 100,
               ),
               IconButton(
                   onPressed: () {
                     getImage();
                   },
-                  icon: Icon(Icons.camera)),
+                  icon: Icon(Icons.camera_alt_outlined),
+                  ),
               TextFormField(
                 controller: _namecontroller,
                 decoration: InputDecoration(
@@ -127,7 +129,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
     final _age = _agecontroller.text.trim();
     final _domain = _domaincontroller.text.trim();
     final _number = _phonenumcontroller.text.trim();
-    final _image = path!;
+    final _image = path;
 
     if (_name.isEmpty || _age.isEmpty || _domain.isEmpty || _number.isEmpty) {
       return;
@@ -140,7 +142,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
         age: _age,
         domain: _domain,
         Number: _number,
-        image: _image);
+        image: _image!);
     addStudent(_student);
   }
 

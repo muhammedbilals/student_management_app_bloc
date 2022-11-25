@@ -14,83 +14,86 @@ class ListStudentWidget extends StatelessWidget {
       valueListenable: StudentListNotifier,
       builder:
           (BuildContext ctx, List<StudentModel> studentList, Widget? child) {
-        return ListView.separated(
-          itemBuilder: (ctx, index) {
-            final data = studentList[index];
-            return ListTile(
-              // leading image circle----------------------------------------
-              leading: CircleAvatar(
-                radius: 20,
-                backgroundImage: FileImage(File(data.image)),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Details(data: data),
-                  ),
-                );
-              },
-              title: Text(data.name),
-              trailing: Wrap(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              EditScreen(index: index, data: data),
-                        ),
-                      );
-                    },
-                    icon: Icon(Icons.edit),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return Container(
-                              child: AlertDialog(
-                                title: Text('Do you Want to Delete?'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      if (data != null) {
-                                        deleteStudent(index);
-                                      } else {
-                                        print('student id is null');
-                                      }
-                                    },
-                                    child: Text('Yes'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('No'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          });
-                    },
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red,
+          return ListView.separated(
+            itemBuilder: (ctx, index) {
+              final data = studentList[index];
+              return ListTile(
+                // leading image circle----------------------------------------
+                leading: CircleAvatar(
+                  radius: 20,
+                  backgroundImage: FileImage(File(data.image)),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Details(data: data),
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
-          separatorBuilder: (ctx, index) {
-            return const Divider();
-          },
-          itemCount: studentList.length,
-        );
+                  );
+                },
+                title: Text(data.name),
+                trailing: Wrap(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                EditScreen(index: index, data: data),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.edit),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                child: AlertDialog(
+                                  title: Text('Do you Want to Delete?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        if (data != null) {
+                                          deleteStudent(index);
+                                          Navigator.pop(context);
+                                        } else {
+                                          print('student id is null');
+                                        }
+                                      },
+                                      child: Text('Yes'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('No'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+            separatorBuilder: (ctx, index) {
+              return const Divider();
+            },
+            itemCount: studentList.length,
+            
+          );
       },
     );
+    
   }
 }
