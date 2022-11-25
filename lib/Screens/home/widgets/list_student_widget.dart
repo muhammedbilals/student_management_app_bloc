@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:student_database/Screens/edit_screen.dart';
 import 'package:student_database/Screens/home/widgets/detailed_list_student.dart';
@@ -20,6 +22,7 @@ class ListStudentWidget extends StatelessWidget {
               // leading image circle----------------------------------------
               leading: CircleAvatar(
                 radius: 20,
+                backgroundImage: FileImage(File(data.image)),
               ),
               onTap: () {
 
@@ -39,7 +42,7 @@ class ListStudentWidget extends StatelessWidget {
                         context,
                      
                       MaterialPageRoute(
-                        builder: (context) => EditScreen(),
+                        builder: (context) => EditScreen(index: index, data: data),
                       ),
                       );
                     },

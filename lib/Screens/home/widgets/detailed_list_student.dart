@@ -49,6 +49,7 @@ class _DetailsState extends State<Details> {
                  Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: CircleAvatar(
+                    backgroundImage: FileImage(File(widget.data.image)),
                         radius: 100,
                       ),
                  ),

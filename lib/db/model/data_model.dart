@@ -14,8 +14,8 @@ class StudentModel extends HiveObject {
   final String domain;
   @HiveField(4)
   final String Number;
-  // @HiveField(5)
-  // final String image;
+  @HiveField(5)
+  final String image;
 
   StudentModel(
       {required this.name,
@@ -23,6 +23,6 @@ class StudentModel extends HiveObject {
       this.id,
       required this.domain,
       required this.Number,
-      // required this.image
+      required this.image
       });
 }

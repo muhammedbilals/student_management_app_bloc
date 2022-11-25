@@ -125,37 +125,30 @@ class _SearchScreenState extends State<SearchScreen> {
                  
                 
                 
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 5,bottom: 7),
-              
-            ),
-            Expanded(
-              child: (displayStudent.length != 0)
-                  ? ListView.separated(
-                      itemBuilder: (context, index) {
-                        // File imageFile = File(displayStudent[index].image);
-                        return ListTile(
-                          leading: CircleAvatar(
-                            // backgroundImage: FileImage(imageFile),
-                            radius: 20,
-                          ),
-                          title: Text(displayStudent[index].name),
-                        );
-                      },
-                      separatorBuilder: (ctx, index) {
-                        return const Divider();
-                      },
-                      itemCount: displayStudent.length,
-                    )
-                    
-                  : const Center(child: Text("The data is not Found")),
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: (displayStudent.length != 0)
+                ? ListView.separated(
+                    itemBuilder: (context, index) {
+                      // File imageFile = File(displayStudent[index].image);
+                      return ListTile(
+                        leading: CircleAvatar(
+                          // backgroundImage: FileImage(imageFile),
+                          radius: 20,
+                        ),
+                        title: Text(displayStudent[index].name),
+                      );
+                    },
+                    separatorBuilder: (ctx, index) {
+                      return const Divider();
+                    },
+                    itemCount: displayStudent.length,
+                  )
+                  
+                : const Center(child: Text("The data is not Found")),
+          ),
+        ],
       ),
     );
   }
