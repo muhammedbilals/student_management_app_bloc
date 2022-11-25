@@ -44,70 +44,96 @@ class _EditScreenState extends State<EditScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            // details image avathar-----------------------------------------------
-            CircleAvatar(
-              backgroundImage: FileImage(File(widget.data.image)),
-              radius: 100,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            IconButton(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // details image avathar-----------------------------------------------
+              CircleAvatar(
+                backgroundImage: FileImage(File(widget.data.image)),
+                radius: 100,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              IconButton(
+                  onPressed: () {
+                    getImage();
+                  },
+                  icon: Icon(Icons.camera)),
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.abc),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        _nameController!.clear();
+                      },
+                      icon: Icon(Icons.close)),
+                  border: OutlineInputBorder(),
+                  labelText: 'name',
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: _ageController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.onetwothree),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        _ageController!.clear();
+                      },
+                      icon: Icon(Icons.close)),
+                  border: OutlineInputBorder(),
+                  labelText: 'age',
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: _domainController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.computer),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        _domainController!.clear();
+                      },
+                      icon: Icon(Icons.close)),
+                  border: OutlineInputBorder(),
+                  labelText: 'Domain',
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: _phoneController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.phone),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        _phoneController!.clear();
+                      },
+                      icon: Icon(Icons.close)),
+                  border: OutlineInputBorder(),
+                  labelText: 'Phone Number',
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton.icon(
                 onPressed: () {
-                  getImage();
+                  Edit(widget.index);
+                  Navigator.pop(context);
                 },
-                icon: Icon(Icons.camera)),
-            TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'name',
+                icon: Icon(Icons.add),
+                label: Text('Edit Student'),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _ageController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'age',
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _domainController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Domain',
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              controller: _phoneController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Phone Number',
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton.icon(
-              onPressed: () {
-                Edit(widget.index);
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.add),
-              label: Text('Edit Student'),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

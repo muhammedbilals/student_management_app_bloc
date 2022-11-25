@@ -36,16 +36,19 @@ class ScreenHome extends StatelessWidget {
             const Expanded(
               child: ListStudentWidget(),
             ),
-            FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddStudentWidget(),
-                  ),
-                );
-              },
-              child: Icon(Icons.add),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddStudentWidget(),
+                    ),
+                  );
+                },
+                child: Icon(Icons.add),
+              ),
             )
           ],
         ),

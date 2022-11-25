@@ -46,6 +46,14 @@ class _DetailsState extends State<Details> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  // Container(
+                  //   child: Text('Name: ${widget.data.name}'),
+                  //   decoration: BoxDecoration(
+                      
+                  //     borderRadius: BorderRadius.circular(20),
+                  //     color: Colors.white10
+                  // ),
+                  // ),
                  Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: CircleAvatar(
@@ -56,6 +64,7 @@ class _DetailsState extends State<Details> {
                   ListTile(
                     leading: Text(
                         style: TextStyle(
+                          
                           fontSize: 23,
                         ),
                         "Name : ${widget.data.name}"),

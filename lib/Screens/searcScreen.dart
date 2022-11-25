@@ -1,75 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:student_database/db/functions/db_functions.dart';
-// import 'package:student_database/db/model/data_model.dart';
-
-// class ScreenSearch extends StatelessWidget {
-//   TextEditingController? _textEditingController = TextEditingController();
-
- 
-
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-      //   title: Container(
-      //     decoration: BoxDecoration(
-      //       color: Colors.blue.shade100,
-      //       borderRadius: BorderRadius.circular(30),
-      //     ),
-      //     child: TextField(
-      //       onChanged: (value) {},
-      //       controller: _textEditingController,
-      //       decoration: InputDecoration(
-      //           border: InputBorder.none,
-      //           errorBorder: InputBorder.none,
-      //           focusedBorder: InputBorder.none,
-      //           contentPadding: EdgeInsets.all(15),
-      //           hintText: 'search'),
-      //     ),
-      //   ),
-      // ),
-//       body: ValueListenableBuilder(
-//         valueListenable: StudentListNotifier,
-//         builder:
-//             (BuildContext ctx, List<StudentModel> studentList, Widget? child) {
-//           return ListView.separated(
-//             itemBuilder: (ctx, index) {
-//               final data = studentList[index];
-//               return ListTile(
-//                 onTap: () {
-//                   studentList = studentList;
-//                 },
-//                 title: Text(data.name),
-//                 subtitle: Text(data.age),
-//               );
-//             },
-//             separatorBuilder: (ctx, index) {
-//               return const Divider();
-//             },
-//             itemCount: studentList.length,
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-// import 'dart:io';
-// // import 'dart:js_util';
-
-// import 'package:flutter/material.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
-// // import 'package:student/db/model/data_model.dart';
-// import 'package:student_database/db/model/data_model.dart';
-// // import 'package:main_project_hive/models/student_model.dart';
-// // import 'package:main_project_hive/widgets/text_input_field.dart';
-
-
-
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:student_database/db/model/data_model.dart';
@@ -133,10 +62,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     itemBuilder: (context, index) {
                       // File imageFile = File(displayStudent[index].image);
                       return ListTile(
-                        leading: CircleAvatar(
-                          // backgroundImage: FileImage(imageFile),
-                          radius: 20,
-                        ),
+                        // leading: CircleAvatar(
+                        //   backgroundColor: Colors.white,
+                        //   // backgroundImage: FileImage(File(data.image)),
+                        //   radius: 20,
+                        // ),
                         title: Text(displayStudent[index].name),
                       );
                     },

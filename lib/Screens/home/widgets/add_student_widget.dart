@@ -34,6 +34,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
           child: Column(
             children: [
               CircleAvatar(
+                // backgroundImage:Image.asset(/assets/person-4.png),
                 radius: 100,
               ),
               IconButton(
@@ -44,8 +45,14 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
               TextFormField(
                 controller: _namecontroller,
                 decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.abc),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        _namecontroller.clear();
+                      },
+                      icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
-                  hintText: 'name',
+                  labelText: 'name',
                 ),
               ),
               SizedBox(
@@ -54,8 +61,14 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
               TextFormField(
                 controller: _agecontroller,
                 decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.onetwothree),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        _agecontroller.clear();
+                      },
+                      icon: Icon(Icons.close)),
+                  labelText: 'age',
                   border: OutlineInputBorder(),
-                  hintText: 'age',
                 ),
               ),
               SizedBox(
@@ -64,8 +77,14 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
               TextFormField(
                 controller: _domaincontroller,
                 decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.computer),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        _domaincontroller.clear();
+                      },
+                      icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
-                  hintText: 'Domain',
+                  labelText: 'Domain',
                 ),
               ),
               SizedBox(
@@ -74,14 +93,21 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
               TextFormField(
                 controller: _phonenumcontroller,
                 decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.phone),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        _phonenumcontroller.clear();
+                      },
+                      icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
-                  hintText: 'Phone Number',
+                  labelText: 'Phone Number',
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
               ElevatedButton.icon(
+                style: ButtonStyle(),
                 onPressed: () {
                   onAddStudentButtonClicked();
                   Navigator.pop(context);

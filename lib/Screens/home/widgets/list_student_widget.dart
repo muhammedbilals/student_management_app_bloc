@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:student_database/Screens/edit_screen.dart';
 import 'package:student_database/Screens/home/widgets/detailed_list_student.dart';
@@ -25,7 +24,6 @@ class ListStudentWidget extends StatelessWidget {
                 backgroundImage: FileImage(File(data.image)),
               ),
               onTap: () {
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -40,21 +38,43 @@ class ListStudentWidget extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                     
-                      MaterialPageRoute(
-                        builder: (context) => EditScreen(index: index, data: data),
-                      ),
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              EditScreen(index: index, data: data),
+                        ),
                       );
                     },
                     icon: Icon(Icons.edit),
                   ),
                   IconButton(
                     onPressed: () {
-                      if (data != null) {
-                        deleteStudent(index);
-                      } else {
-                        print('student id is null');
-                      }
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              child: AlertDialog(
+                                title: Text('Do you Want to Delete?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      if (data != null) {
+                                        deleteStudent(index);
+                                      } else {
+                                        print('student id is null');
+                                      }
+                                    },
+                                    child: Text('Yes'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('No'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          });
                     },
                     icon: Icon(
                       Icons.delete,
