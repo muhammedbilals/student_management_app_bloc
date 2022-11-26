@@ -57,7 +57,7 @@ class _EditScreenState extends State<EditScreen> {
               ),
               IconButton(
                   onPressed: () {
-                    getImage();
+                      getImage();
                   },
                   icon: Icon(Icons.camera)),
               TextFormField(
@@ -161,8 +161,7 @@ class _EditScreenState extends State<EditScreen> {
 
   getImage() async {
     var path;
-    final PickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (PickedFile == null) {
       return;
     } else {

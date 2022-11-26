@@ -35,7 +35,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
             children: [
               CircleAvatar(
                 backgroundColor: Colors.grey.shade400,
-                backgroundImage: NetworkImage('https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/person-4.png'),
+                backgroundImage: AssetImage('assets\person-4.png'),
                 radius: 100,
               ),
               IconButton(
