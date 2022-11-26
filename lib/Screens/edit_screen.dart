@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -140,14 +139,7 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   Future<void> Edit(int index) async {
-    // final _name = _namecontroller!.text.trim();
-    // final _age = _ageController!.text.trim();
-    // final _place = _placeController!.text.trim();
-    // final _phone = _phoneController!.text.trim();
-
-    // final _key = DateTime.now().toString();
-    // final image = path!;
-    final _student = StudentModel(
+  final _student = StudentModel(
         name: _nameController!.text,
         age: _ageController!.text,
         domain: _domainController!.text,

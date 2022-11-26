@@ -1,4 +1,4 @@
-            import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:student_database/Screens/Home.dart';
 import 'package:student_database/db/model/data_model.dart';
