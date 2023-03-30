@@ -1,6 +1,6 @@
 {
-    "name": "student_database",
-    "short_name": "student_database",
+    "name": "student_database_bloc",
+    "short_name": "student_database_bloc",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

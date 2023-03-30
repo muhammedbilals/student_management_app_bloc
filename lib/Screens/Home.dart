@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:student_database/Screens/home/widgets/add_student_widget.dart';
-import 'package:student_database/Screens/home/widgets/list_student_widget.dart';
-import 'package:student_database/Screens/searcScreen.dart';
-import 'package:student_database/db/functions/db_functions.dart';
+import 'package:student_database_bloc/Screens/home/widgets/add_student_widget.dart';
+import 'package:student_database_bloc/Screens/home/widgets/list_student_widget.dart';
+import 'package:student_database_bloc/Screens/searcScreen.dart';
+import 'package:student_database_bloc/db/functions/db_functions.dart';
+
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -33,7 +34,7 @@ class ScreenHome extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const Expanded(
+             Expanded(
               child: ListStudentWidget(),
             ),
             Padding(

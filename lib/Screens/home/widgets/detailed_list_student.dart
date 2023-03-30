@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:student_database/db/model/data_model.dart';
+import 'package:student_database_bloc/db/model/data_model.dart';
 
 class Details extends StatefulWidget {
   var data;

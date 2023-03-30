@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:student_database/db/functions/db_functions.dart';
-import 'package:student_database/db/model/data_model.dart';
+import 'package:student_database_bloc/db/functions/db_functions.dart';
+import 'package:student_database_bloc/db/model/data_model.dart';
+
 
 class AddStudentWidget extends StatefulWidget {
   AddStudentWidget({super.key});
@@ -35,7 +36,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
             children: [
               CircleAvatar(
                 backgroundColor: Colors.grey.shade400,
-                backgroundImage: AssetImage('assets\person-4.png'),
+                // backgroundImage: AssetImage('assets\person-4.png'),
                 radius: 100,
               ),
               IconButton(
