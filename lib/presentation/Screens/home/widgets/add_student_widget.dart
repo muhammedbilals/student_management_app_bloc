@@ -1,10 +1,10 @@
 import 'dart:io';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:student_database_bloc/db/functions/db_functions.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
-
+import 'package:student_database_bloc/logic/bloc/student_bloc.dart';
 
 class AddStudentWidget extends StatefulWidget {
   AddStudentWidget({super.key});
@@ -40,11 +40,11 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 radius: 100,
               ),
               IconButton(
-                  onPressed: () {
-                    getImage();
-                  },
-                  icon: Icon(Icons.camera_alt_outlined),
-                  ),
+                onPressed: () {
+                  getImage();
+                },
+                icon: Icon(Icons.camera_alt_outlined),
+              ),
               TextFormField(
                 controller: _namecontroller,
                 decoration: InputDecoration(
@@ -112,7 +112,15 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
               ElevatedButton.icon(
                 style: ButtonStyle(),
                 onPressed: () {
-                  onAddStudentButtonClicked();
+                  // onAddStudentButtonClicked();
+
+                  BlocProvider.of<StudentBloc>(context).add(AddData(
+                      StudentModel(
+                          name: _namecontroller.text,
+                          age: _agecontroller.text,
+                          domain: _domaincontroller.text,
+                          Number: _phonenumcontroller.text,
+                          image: path ?? "assets/assets/person-4.png")));
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.add),

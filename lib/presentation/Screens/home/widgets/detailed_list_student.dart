@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
 
 class Details extends StatefulWidget {
-  var data;
+  StudentModel? student;
 
-  Details({super.key, this.data});
+  Details({super.key,this.student});
 
   @override
   State<Details> createState() => _DetailsState();
 }
 
 class _DetailsState extends State<Details> {
-  StudentModel? studentdata;
+  
   // String? image;
   File? image;
   Future pickImage() async {
@@ -31,7 +31,7 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     // StudentDetails(studentdata);
-    print(studentdata);
+    print(widget.student);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Student Details'),
@@ -45,7 +45,6 @@ class _DetailsState extends State<Details> {
                   // Container(
                   //   child: Text('Name: ${widget.data.name}'),
                   //   decoration: BoxDecoration(
-                      
                   //     borderRadius: BorderRadius.circular(20),
                   //     color: Colors.white10
                   // ),
@@ -53,7 +52,7 @@ class _DetailsState extends State<Details> {
                  Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: CircleAvatar(
-                    backgroundImage: FileImage(File(widget.data.image)),
+                    backgroundImage: FileImage(File(widget.student!.image)),
                         radius: 100,
                       ),
                  ),
@@ -63,27 +62,27 @@ class _DetailsState extends State<Details> {
                           
                           fontSize: 23,
                         ),
-                        "Name : ${widget.data.name}"),
+                        "Name : ${widget.student!.name}"),
                     // title: Text('${passValue.name}'),
                   ),
                   ListTile(
                     leading: Text(
                         style: TextStyle(fontSize: 23),
-                        "Age : ${widget.data.age}"),
+                        "Age : ${widget.student!.age}"),
                   ),
                   ListTile(
                     leading: Text(
                         style: TextStyle(
                           fontSize: 23,
                         ),
-                        "Domain : ${widget.data.domain}"),
+                        "Domain : ${widget.student!.domain}"),
                   ),
                   ListTile(
                     leading: Text(
                         style: TextStyle(
                           fontSize: 23,
                         ),
-                        "Phone Number : ${widget.data.Number}"),
+                        "Phone Number : ${widget.student!.Number}"),
                   ),
 
                 ],
@@ -92,14 +91,5 @@ class _DetailsState extends State<Details> {
           ),
         ));
   }
-// Future<StudentModel?> StudentDetails(index) async {
-//   final studentDB = await Hive.openBox<StudentModel>('student_db');
-//   final studentdata = studentDB.getAt(index);
-//   return studentdata;
-// }
 
 }
-//  Text('Name:${widget.data.name}'),
-//                     Text('Age:${widget.data.age}'),
-//                     Text('Domain:${widget.data.domain}'),
-//                     Text('Number:${widget.data.Number}'),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 part 'data_model.g.dart';
 
@@ -23,6 +24,6 @@ class StudentModel extends HiveObject {
       this.id,
       required this.domain,
       required this.Number,
-      required this.image
+      required this.image 
       });
 }
