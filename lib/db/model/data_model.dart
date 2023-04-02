@@ -8,15 +8,15 @@ class StudentModel extends HiveObject {
   int? id;
 
   @HiveField(1)
-  final String name;
+  late final String name;
   @HiveField(2)
-  final String age;
+  late final String age;
   @HiveField(3)
-  final String domain;
+  late final String domain;
   @HiveField(4)
-  final String Number;
+  late final String Number;
   @HiveField(5)
-  final String image;
+  late final String image;
 
   StudentModel(
       {required this.name,

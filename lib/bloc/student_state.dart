@@ -14,10 +14,15 @@ class DisplayAllStudents extends StudentState {
   final List<StudentModel> Students;
 
   DisplayAllStudents(this.Students);
+    @override
+  List<Object> get props => [Students];
+
 }
 
 class DisplaySpecificData extends StudentState {
   final StudentModel student;
 
   DisplaySpecificData(this.student);
+      @override
+  List<Object> get props => [student];
 }

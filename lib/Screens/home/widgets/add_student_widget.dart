@@ -1,72 +1,58 @@
 import 'dart:io';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:student_database_bloc/bloc/student_bloc.dart';
 import 'package:student_database_bloc/db/functions/db_functions.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
 
 
-class EditScreen extends StatefulWidget {
-  EditScreen({super.key, required this.index, required this.data});
-
-  int index;
-  StudentModel data;
+class AddStudentWidget extends StatefulWidget {
+  AddStudentWidget({super.key});
 
   @override
-  State<EditScreen> createState() => _EditScreenState();
+  State<AddStudentWidget> createState() => _AddStudentWidgetState();
 }
 
-class _EditScreenState extends State<EditScreen> {
+class _AddStudentWidgetState extends State<AddStudentWidget> {
   String? path;
-  TextEditingController? _nameController;
-  TextEditingController? _ageController;
-  TextEditingController? _domainController;
-  TextEditingController? _phoneController;
+  final _namecontroller = TextEditingController();
 
-  @override
-  void initState() {
-    _nameController = TextEditingController(text: widget.data.name);
+  final _agecontroller = TextEditingController();
 
-    _ageController = TextEditingController(text: widget.data.age);
+  final _domaincontroller = TextEditingController();
 
-    _domainController = TextEditingController(text: widget.data.domain);
-
-    _phoneController = TextEditingController(text: widget.data.Number);
-
-    super.initState();
-  }
+  final _phonenumcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Student Details'),
+        title: Text('Add Student Details'),
       ),
       body: Padding(
         padding: EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // details image avathar-----------------------------------------------
               CircleAvatar(
-                backgroundImage: FileImage(File(widget.data.image)),
+                backgroundColor: Colors.grey.shade400,
+                // backgroundImage: AssetImage('assets\person-4.png'),
                 radius: 100,
               ),
-              SizedBox(
-                height: 10,
-              ),
               IconButton(
-                  onPressed: () {
-                      getImage();
-                  },
-                  icon: Icon(Icons.camera)),
+                onPressed: () {
+                  getImage();
+                },
+                icon: Icon(Icons.camera_alt_outlined),
+              ),
               TextFormField(
-                controller: _nameController,
+                controller: _namecontroller,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.abc),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _nameController!.clear();
+                        _namecontroller.clear();
                       },
                       icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
@@ -77,28 +63,28 @@ class _EditScreenState extends State<EditScreen> {
                 height: 10,
               ),
               TextFormField(
-                controller: _ageController,
+                controller: _agecontroller,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.onetwothree),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _ageController!.clear();
+                        _agecontroller.clear();
                       },
                       icon: Icon(Icons.close)),
-                  border: OutlineInputBorder(),
                   labelText: 'age',
+                  border: OutlineInputBorder(),
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
               TextFormField(
-                controller: _domainController,
+                controller: _domaincontroller,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.computer),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _domainController!.clear();
+                        _domaincontroller.clear();
                       },
                       icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
@@ -109,12 +95,12 @@ class _EditScreenState extends State<EditScreen> {
                 height: 10,
               ),
               TextFormField(
-                controller: _phoneController,
+                controller: _phonenumcontroller,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.phone),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _phoneController!.clear();
+                        _phonenumcontroller.clear();
                       },
                       icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
@@ -125,12 +111,21 @@ class _EditScreenState extends State<EditScreen> {
                 height: 10,
               ),
               ElevatedButton.icon(
+                style: ButtonStyle(),
                 onPressed: () {
-                  Edit(widget.index);
+                  // onAddStudentButtonClicked();
+
+                  BlocProvider.of<StudentBloc>(context).add(AddData(
+                      StudentModel(
+                          name: _namecontroller.text,
+                          age: _agecontroller.text,
+                          domain: _domaincontroller.text,
+                          Number: _phonenumcontroller.text,
+                          image: path ?? "assets/assets/person-4.png")));
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.add),
-                label: Text('Edit Student'),
+                label: Text('Add Student'),
               ),
             ],
           ),
@@ -139,22 +134,32 @@ class _EditScreenState extends State<EditScreen> {
     );
   }
 
-  Future<void> Edit(int index) async {
-  final _student = StudentModel(
-        name: _nameController!.text,
-        age: _ageController!.text,
-        domain: _domainController!.text,
-        Number: _phoneController!.text,
-        // id: _key,
-        image: path!);
-    final studentDB = await Hive.openBox<StudentModel>('student_db');
-    studentDB.putAt(index, _student);
-    getAllStudents();
-  }
+  // Future<void> onAddStudentButtonClicked() async {
+  //   final _name = _namecontroller.text.trim();
+  //   final _age = _agecontroller.text.trim();
+  //   final _domain = _domaincontroller.text.trim();
+  //   final _number = _phonenumcontroller.text.trim();
+  //   final _image = path;
+
+  //   if (_name.isEmpty || _age.isEmpty || _domain.isEmpty || _number.isEmpty) {
+  //     return;
+  //   } else {
+  //     print('$_name $_age');
+  //   }
+
+  //   final _student = StudentModel(
+  //       name: _name,
+  //       age: _age,
+  //       domain: _domain,
+  //       Number: _number,
+  //       image: _image!);
+  //   addStudent(_student);
+  // }
 
   getImage() async {
     var path;
-    final PickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final PickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (PickedFile == null) {
       return;
     } else {

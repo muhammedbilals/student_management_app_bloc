@@ -1,57 +1,73 @@
 import 'dart:io';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:student_database_bloc/bloc/student_bloc.dart';
 import 'package:student_database_bloc/db/functions/db_functions.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
-import 'package:student_database_bloc/logic/bloc/student_bloc.dart';
 
-class AddStudentWidget extends StatefulWidget {
-  AddStudentWidget({super.key});
+class EditScreen extends StatefulWidget {
+  EditScreen({super.key, required this.index, required this.data});
+
+  int index;
+  StudentModel data;
 
   @override
-  State<AddStudentWidget> createState() => _AddStudentWidgetState();
+  State<EditScreen> createState() => _EditScreenState();
 }
 
-class _AddStudentWidgetState extends State<AddStudentWidget> {
+class _EditScreenState extends State<EditScreen> {
   String? path;
-  final _namecontroller = TextEditingController();
+  TextEditingController? _nameController;
+  TextEditingController? _ageController;
+  TextEditingController? _domainController;
+  TextEditingController? _phoneController;
 
-  final _agecontroller = TextEditingController();
+  @override
+  void initState() {
+    _nameController = TextEditingController(text: widget.data.name);
 
-  final _domaincontroller = TextEditingController();
+    _ageController = TextEditingController(text: widget.data.age);
 
-  final _phonenumcontroller = TextEditingController();
+    _domainController = TextEditingController(text: widget.data.domain);
+
+    _phoneController = TextEditingController(text: widget.data.Number);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Student Details'),
+        title: Text('Edit Student Details'),
       ),
       body: Padding(
         padding: EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
+              // details image avathar-----------------------------------------------
               CircleAvatar(
-                backgroundColor: Colors.grey.shade400,
-                // backgroundImage: AssetImage('assets\person-4.png'),
+                backgroundImage: FileImage(File(widget.data.image)),
                 radius: 100,
               ),
-              IconButton(
-                onPressed: () {
-                  getImage();
-                },
-                icon: Icon(Icons.camera_alt_outlined),
+              SizedBox(
+                height: 10,
               ),
+              IconButton(
+                  onPressed: () {
+                    getImage();
+                  },
+                  icon: Icon(Icons.camera)),
               TextFormField(
-                controller: _namecontroller,
+                controller: _nameController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.abc),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _namecontroller.clear();
+                        _nameController!.clear();
                       },
                       icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
@@ -62,28 +78,28 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 height: 10,
               ),
               TextFormField(
-                controller: _agecontroller,
+                controller: _ageController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.onetwothree),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _agecontroller.clear();
+                        _ageController!.clear();
                       },
                       icon: Icon(Icons.close)),
-                  labelText: 'age',
                   border: OutlineInputBorder(),
+                  labelText: 'age',
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
               TextFormField(
-                controller: _domaincontroller,
+                controller: _domainController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.computer),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _domaincontroller.clear();
+                        _domainController!.clear();
                       },
                       icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
@@ -94,12 +110,12 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 height: 10,
               ),
               TextFormField(
-                controller: _phonenumcontroller,
+                controller: _phoneController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.phone),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        _phonenumcontroller.clear();
+                        _phoneController!.clear();
                       },
                       icon: Icon(Icons.close)),
                   border: OutlineInputBorder(),
@@ -110,21 +126,21 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 height: 10,
               ),
               ElevatedButton.icon(
-                style: ButtonStyle(),
                 onPressed: () {
-                  // onAddStudentButtonClicked();
-
-                  BlocProvider.of<StudentBloc>(context).add(AddData(
-                      StudentModel(
-                          name: _namecontroller.text,
-                          age: _agecontroller.text,
-                          domain: _domaincontroller.text,
-                          Number: _phonenumcontroller.text,
-                          image: path ?? "assets/assets/person-4.png")));
+                  final _student = StudentModel(
+        name: _nameController!.text,
+        age: _ageController!.text,
+        domain: _domainController!.text,
+        Number: _phoneController!.text,
+        // id: _key,
+        image: path!);
+                  context.read<StudentBloc>().add(UpdateSpecificData(
+                    _student,widget.index
+                  ));
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.add),
-                label: Text('Add Student'),
+                label: Text('Edit Student'),
               ),
             ],
           ),
@@ -133,26 +149,17 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
     );
   }
 
-  Future<void> onAddStudentButtonClicked() async {
-    final _name = _namecontroller.text.trim();
-    final _age = _agecontroller.text.trim();
-    final _domain = _domaincontroller.text.trim();
-    final _number = _phonenumcontroller.text.trim();
-    final _image = path;
-
-    if (_name.isEmpty || _age.isEmpty || _domain.isEmpty || _number.isEmpty) {
-      return;
-    } else {
-      print('$_name $_age');
-    }
-
+  Future<void> Edit(int index) async {
     final _student = StudentModel(
-        name: _name,
-        age: _age,
-        domain: _domain,
-        Number: _number,
-        image: _image!);
-    addStudent(_student);
+        name: _nameController!.text,
+        age: _ageController!.text,
+        domain: _domainController!.text,
+        Number: _phoneController!.text,
+        // id: _key,
+        image: path!);
+    final studentDB = await Hive.openBox<StudentModel>('student_db');
+    studentDB.putAt(index, _student);
+    getAllStudents();
   }
 
   getImage() async {

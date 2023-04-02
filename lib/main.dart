@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_database_bloc/presentation/Screens/Home.dart';
+import 'package:student_database_bloc/Screens/Home.dart';
+import 'package:student_database_bloc/bloc/student_bloc.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
-import 'package:student_database_bloc/logic/bloc/student_bloc.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => StudentBloc(),
       child: MaterialApp(
+
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
