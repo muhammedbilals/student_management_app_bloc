@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:student_database_bloc/bloc/student_bloc.dart';
-import 'package:student_database_bloc/db/functions/db_functions.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
 
 
 class AddStudentWidget extends StatefulWidget {
-  AddStudentWidget({super.key});
+  const AddStudentWidget({super.key});
 
   @override
   State<AddStudentWidget> createState() => _AddStudentWidgetState();
@@ -24,14 +23,16 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
 
   final _phonenumcontroller = TextEditingController();
 
+   ValueNotifier _stringnofitier = ValueNotifier('');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Student Details'),
+        title: const Text('Add Student Details'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -40,78 +41,89 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 // backgroundImage: AssetImage('assets\person-4.png'),
                 radius: 100,
               ),
-              IconButton(
-                onPressed: () {
-                  getImage();
+             ValueListenableBuilder(
+                valueListenable: _stringnofitier,
+                builder: (context, path, child) {
+                  return IconButton(
+                      onPressed: () async {
+                        var path;
+                        final PickedFile = await ImagePicker()
+                            .pickImage(source: ImageSource.gallery);
+                        if (PickedFile == null) {
+                          return;
+                        } else {
+                          _stringnofitier.value = PickedFile.path;
+                        }
+                      },
+                      icon: const Icon(Icons.camera));
                 },
-                icon: Icon(Icons.camera_alt_outlined),
               ),
               TextFormField(
                 controller: _namecontroller,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.abc),
+                  prefixIcon: const Icon(Icons.abc),
                   suffixIcon: IconButton(
                       onPressed: () {
                         _namecontroller.clear();
                       },
-                      icon: Icon(Icons.close)),
-                  border: OutlineInputBorder(),
+                      icon: const Icon(Icons.close)),
+                  border: const OutlineInputBorder(),
                   labelText: 'name',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 controller: _agecontroller,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.onetwothree),
+                  prefixIcon: const Icon(Icons.onetwothree),
                   suffixIcon: IconButton(
                       onPressed: () {
                         _agecontroller.clear();
                       },
-                      icon: Icon(Icons.close)),
+                      icon: const Icon(Icons.close)),
                   labelText: 'age',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 controller: _domaincontroller,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.computer),
+                  prefixIcon: const Icon(Icons.computer),
                   suffixIcon: IconButton(
                       onPressed: () {
                         _domaincontroller.clear();
                       },
-                      icon: Icon(Icons.close)),
-                  border: OutlineInputBorder(),
+                      icon: const Icon(Icons.close)),
+                  border: const OutlineInputBorder(),
                   labelText: 'Domain',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 controller: _phonenumcontroller,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.phone),
+                  prefixIcon: const Icon(Icons.phone),
                   suffixIcon: IconButton(
                       onPressed: () {
                         _phonenumcontroller.clear();
                       },
-                      icon: Icon(Icons.close)),
-                  border: OutlineInputBorder(),
+                      icon: const Icon(Icons.close)),
+                  border: const OutlineInputBorder(),
                   labelText: 'Phone Number',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ElevatedButton.icon(
-                style: ButtonStyle(),
+                style: const ButtonStyle(),
                 onPressed: () {
                   // onAddStudentButtonClicked();
                   BlocProvider.of<StudentBloc>(context).add(AddData(
@@ -123,8 +135,8 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                           image: path ?? "assets/assets/person-4.png")));
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.add),
-                label: Text('Add Student'),
+                icon: const Icon(Icons.add),
+                label: const Text('Add Student'),
               ),
             ],
           ),
@@ -155,16 +167,16 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
   //   addStudent(_student);
   // }
 
-  getImage() async {
-    var path;
-    final PickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (PickedFile == null) {
-      return;
-    } else {
-      setState(() {
-        this.path = PickedFile.path;
-      });
-    }
-  }
+  // getImage() async {
+  //   var path;
+  //   final PickedFile =
+  //       await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (PickedFile == null) {
+  //     return;
+  //   } else {
+  //     setState(() {
+  //       this.path = PickedFile.path;
+  //     });
+  //   }
+  // }
 }
