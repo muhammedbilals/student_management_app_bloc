@@ -11,7 +11,7 @@ class ScreenHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getAllStudents();
+    // getAllStudents();
     return Scaffold(
       appBar: AppBar(
         title: Row(

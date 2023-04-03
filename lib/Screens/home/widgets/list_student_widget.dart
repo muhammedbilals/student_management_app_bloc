@@ -23,11 +23,11 @@ class ListStudentWidget extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 // final data = state[index];
                 return ListTile(
-                  // leading image circle----------------------------------------
-                  // leading: CircleAvatar(
-                  //   radius: 20,
-                  //   backgroundImage: FileImage(File(state.Students[index].image)),
-                  // ),
+                  
+                  leading: CircleAvatar(
+                    radius: 20,
+                    backgroundImage: FileImage(File(state.Students[index].image)),
+                  ),
                   onTap: () {
                     Navigator.push(
                       context,

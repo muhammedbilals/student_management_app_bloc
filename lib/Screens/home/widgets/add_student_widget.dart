@@ -114,7 +114,6 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 style: ButtonStyle(),
                 onPressed: () {
                   // onAddStudentButtonClicked();
-
                   BlocProvider.of<StudentBloc>(context).add(AddData(
                       StudentModel(
                           name: _namecontroller.text,

@@ -23,6 +23,7 @@ class _EditScreenState extends State<EditScreen> {
   TextEditingController? _ageController;
   TextEditingController? _domainController;
   TextEditingController? _phoneController;
+  ValueNotifier _stringnofitier = ValueNotifier('');
 
   @override
   void initState() {
@@ -56,11 +57,23 @@ class _EditScreenState extends State<EditScreen> {
               SizedBox(
                 height: 10,
               ),
-              IconButton(
-                  onPressed: () {
-                    getImage();
-                  },
-                  icon: Icon(Icons.camera)),
+              ValueListenableBuilder(
+                valueListenable: _stringnofitier,
+                builder: (context, value, child) {
+                  return IconButton(
+                      onPressed: () async {
+                        var path;
+                        final PickedFile = await ImagePicker()
+                            .pickImage(source: ImageSource.gallery);
+                        if (PickedFile == null) {
+                          return;
+                        } else {
+                          value = PickedFile.path;
+                        }
+                      },
+                      icon: Icon(Icons.camera));
+                },
+              ),
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
@@ -128,15 +141,15 @@ class _EditScreenState extends State<EditScreen> {
               ElevatedButton.icon(
                 onPressed: () {
                   final _student = StudentModel(
-        name: _nameController!.text,
-        age: _ageController!.text,
-        domain: _domainController!.text,
-        Number: _phoneController!.text,
-        // id: _key,
-        image: path!);
-                  context.read<StudentBloc>().add(UpdateSpecificData(
-                    _student,widget.index
-                  ));
+                      name: _nameController!.text,
+                      age: _ageController!.text,
+                      domain: _domainController!.text,
+                      Number: _phoneController!.text,
+                      // id: _key,
+                      image: path!);
+                  context
+                      .read<StudentBloc>()
+                      .add(UpdateSpecificData(_student, widget.index));
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.add),
@@ -149,29 +162,29 @@ class _EditScreenState extends State<EditScreen> {
     );
   }
 
-  Future<void> Edit(int index) async {
-    final _student = StudentModel(
-        name: _nameController!.text,
-        age: _ageController!.text,
-        domain: _domainController!.text,
-        Number: _phoneController!.text,
-        // id: _key,
-        image: path!);
-    final studentDB = await Hive.openBox<StudentModel>('student_db');
-    studentDB.putAt(index, _student);
-    getAllStudents();
-  }
+  // Future<void> Edit(int index) async {
+  //   final _student = StudentModel(
+  //       name: _nameController!.text,
+  //       age: _ageController!.text,
+  //       domain: _domainController!.text,
+  //       Number: _phoneController!.text,
+  //       // id: _key,
+  //       image: path!);
+  //   final studentDB = await Hive.openBox<StudentModel>('student_db');
+  //   studentDB.putAt(index, _student);
+  //   getAllStudents();
+  // }
 
-  getImage() async {
-    var path;
-    final PickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (PickedFile == null) {
-      return;
-    } else {
-      setState(() {
-        this.path = PickedFile.path;
-      });
-    }
-  }
+  // getImage() async {
+  //   var path;
+  //   final PickedFile =
+  //       await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (PickedFile == null) {
+  //     return;
+  //   } else {
+  //     setState(() {
+  //       this.path = PickedFile.path;
+  //     });
+  //   }
+  // }
 }

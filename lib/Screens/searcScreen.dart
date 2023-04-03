@@ -20,15 +20,6 @@ class _SearchScreenState extends State<SearchScreen> {
   late List<StudentModel> displayStudent =
       List<StudentModel>.from(studentBoxList);
 
-  void searchStudentList(String value) {
-    setState(() {
-      displayStudent = studentBoxList
-          .where((element) =>
-              element.name.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
