@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
 
-
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
@@ -12,12 +11,14 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  ValueNotifier searchListner = ValueNotifier([]);
   final _searchController = TextEditingController();
 
   final List<StudentModel> studentBoxList =
       Hive.box<StudentModel>('student_db').values.toList();
 
-  late List<StudentModel> displayStudent = List<StudentModel>.from(studentBoxList);
+  late List<StudentModel> displayStudent =
+      List<StudentModel>.from(studentBoxList);
 
   void searchStudentList(String value) {
     setState(() {
@@ -39,47 +40,50 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           child: TextField(
             onChanged: (value) {
-                  searchStudentList(value);
-                },
-            
+              searchListner.value = studentBoxList
+                  .where((element) =>
+                      element.name.toLowerCase().contains(value.toLowerCase()))
+                  .toList();
+            },
             decoration: InputDecoration(
                 border: InputBorder.none,
                 errorBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 contentPadding: EdgeInsets.all(15),
                 hintText: 'search'),
-                controller: _searchController,
+            controller: _searchController,
           ),
         ),
       ),
-                 
-                
-                
-      body: Column(
-        children: [
-          Expanded(
-            child: (displayStudent.length != 0)
-                ? ListView.separated(
-                    itemBuilder: (context, index) {
-                      // File imageFile = File(displayStudent[index].image);
-                      return ListTile(
-                        // leading: CircleAvatar(
-                        //   backgroundColor: Colors.white,
-                        //   // backgroundImage: FileImage(File(data.image)),
-                        //   radius: 20,
-                        // ),
-                        title: Text(displayStudent[index].name),
-                      );
-                    },
-                    separatorBuilder: (ctx, index) {
-                      return const Divider();
-                    },
-                    itemCount: displayStudent.length,
-                  )
-                  
-                : const Center(child: Text("The data is not Found")),
-          ),
-        ],
+      body: ValueListenableBuilder(
+        valueListenable: searchListner,
+        builder: (context, displayStudent, child) {
+          return Column(
+            children: [
+              Expanded(
+                child: (displayStudent.length != 0)
+                    ? ListView.separated(
+                        itemBuilder: (context, index) {
+                          // File imageFile = File(displayStudent[index].image);
+                          return ListTile(
+                            // leading: CircleAvatar(
+                            //   backgroundColor: Colors.white,
+                            //   // backgroundImage: FileImage(File(data.image)),
+                            //   radius: 20,
+                            // ),
+                            title: Text(displayStudent[index].name),
+                          );
+                        },
+                        separatorBuilder: (ctx, index) {
+                          return const Divider();
+                        },
+                        itemCount: displayStudent.length,
+                      )
+                    : const Center(child: Text("The data is not Found")),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
