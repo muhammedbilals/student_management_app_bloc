@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 part 'data_model.g.dart';
 

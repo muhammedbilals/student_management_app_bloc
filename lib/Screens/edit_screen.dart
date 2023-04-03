@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_database_bloc/bloc/student_bloc.dart';
-import 'package:student_database_bloc/db/functions/db_functions.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
 
 class EditScreen extends StatefulWidget {
@@ -42,10 +40,10 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Student Details'),
+        title: const Text('Edit Student Details'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -54,7 +52,7 @@ class _EditScreenState extends State<EditScreen> {
                 backgroundImage: FileImage(File(widget.data.image)),
                 radius: 100,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ValueListenableBuilder(
@@ -71,71 +69,71 @@ class _EditScreenState extends State<EditScreen> {
                           value = PickedFile.path;
                         }
                       },
-                      icon: Icon(Icons.camera));
+                      icon: const Icon(Icons.camera));
                 },
               ),
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.abc),
+                  prefixIcon: const Icon(Icons.abc),
                   suffixIcon: IconButton(
                       onPressed: () {
                         _nameController!.clear();
                       },
-                      icon: Icon(Icons.close)),
-                  border: OutlineInputBorder(),
+                      icon: const Icon(Icons.close)),
+                  border: const OutlineInputBorder(),
                   labelText: 'name',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 controller: _ageController,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.onetwothree),
+                  prefixIcon: const Icon(Icons.onetwothree),
                   suffixIcon: IconButton(
                       onPressed: () {
                         _ageController!.clear();
                       },
-                      icon: Icon(Icons.close)),
-                  border: OutlineInputBorder(),
+                      icon: const Icon(Icons.close)),
+                  border: const OutlineInputBorder(),
                   labelText: 'age',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 controller: _domainController,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.computer),
+                  prefixIcon: const Icon(Icons.computer),
                   suffixIcon: IconButton(
                       onPressed: () {
                         _domainController!.clear();
                       },
-                      icon: Icon(Icons.close)),
-                  border: OutlineInputBorder(),
+                      icon: const Icon(Icons.close)),
+                  border: const OutlineInputBorder(),
                   labelText: 'Domain',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 controller: _phoneController,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.phone),
+                  prefixIcon: const Icon(Icons.phone),
                   suffixIcon: IconButton(
                       onPressed: () {
                         _phoneController!.clear();
                       },
-                      icon: Icon(Icons.close)),
-                  border: OutlineInputBorder(),
+                      icon: const Icon(Icons.close)),
+                  border: const OutlineInputBorder(),
                   labelText: 'Phone Number',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ElevatedButton.icon(
@@ -152,8 +150,8 @@ class _EditScreenState extends State<EditScreen> {
                       .add(UpdateSpecificData(_student, widget.index));
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.add),
-                label: Text('Edit Student'),
+                icon: const Icon(Icons.add),
+                label: const Text('Edit Student'),
               ),
             ],
           ),

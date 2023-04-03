@@ -17,17 +17,17 @@ class ScreenHome extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Student Details'),
+            const Text('Student Details'),
             IconButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SearchScreen(),
+                    builder: (context) => const SearchScreen(),
                   ),
                 );
               },
-              icon: Icon(Icons.search),
+              icon: const Icon(Icons.search),
             ),
           ],
         ),
@@ -35,7 +35,7 @@ class ScreenHome extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
+            const Expanded(
               child: ListStudentWidget(),
             ),
             Padding(
@@ -50,7 +50,7 @@ class ScreenHome extends StatelessWidget {
                   );
                   // Navigator.pop(context);
                 },
-                child: Icon(Icons.add),
+                child: const Icon(Icons.add),
               ),
             )
           ],

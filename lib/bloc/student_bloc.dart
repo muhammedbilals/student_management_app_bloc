@@ -10,7 +10,7 @@ part 'student_state.dart';
 
 class StudentBloc extends Bloc<StudentEvent, StudentState> {
   StudentBloc() : super(StudentInitial()) {
-    StudentModel studentModel;
+ 
     on<FetchAllData>((event, emit) {
       try {
         final studnetdata = StudentBox.getStudentData();
@@ -51,7 +51,7 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
     });
     on<DeleteSpecificData>((event, emit) {
       final studnetdata = StudentBox.getStudentData();
-      List<StudentModel> students = studnetdata.values.toList();
+    
       try {
         studnetdata.deleteAt(event.index);
         add(FetchAllData());

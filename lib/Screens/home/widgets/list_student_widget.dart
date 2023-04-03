@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_database_bloc/Screens/edit_screen.dart';
 import 'package:student_database_bloc/Screens/home/widgets/detailed_list_student.dart';
 import 'package:student_database_bloc/bloc/student_bloc.dart';
-import 'package:student_database_bloc/db/functions/db_functions.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
 
 class ListStudentWidget extends StatelessWidget {
@@ -61,7 +60,7 @@ class ListStudentWidget extends StatelessWidget {
                             ),
                           );
                         },
-                        icon: Icon(Icons.edit),
+                        icon: const Icon(Icons.edit),
                       ),
                       IconButton(
                         onPressed: () {
@@ -71,7 +70,7 @@ class ListStudentWidget extends StatelessWidget {
                                               
                                         },
 
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.delete,
                           color: Colors.red,
                         ),
@@ -87,7 +86,7 @@ class ListStudentWidget extends StatelessWidget {
             );
           }
         }
-        return Center(
+        return const Center(
           child: Text('List is empty'),
         );
       },

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
@@ -36,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       element.name.toLowerCase().contains(value.toLowerCase()))
                   .toList();
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: InputBorder.none,
                 errorBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,

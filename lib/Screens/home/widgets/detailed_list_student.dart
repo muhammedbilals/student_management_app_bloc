@@ -58,7 +58,7 @@ class _DetailsState extends State<Details> {
                  ),
                   ListTile(
                     leading: Text(
-                        style: TextStyle(
+                        style: const TextStyle(
                           
                           fontSize: 23,
                         ),
@@ -67,19 +67,19 @@ class _DetailsState extends State<Details> {
                   ),
                   ListTile(
                     leading: Text(
-                        style: TextStyle(fontSize: 23),
+                        style: const TextStyle(fontSize: 23),
                         "Age : ${widget.student!.age}"),
                   ),
                   ListTile(
                     leading: Text(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 23,
                         ),
                         "Domain : ${widget.student!.domain}"),
                   ),
                   ListTile(
                     leading: Text(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 23,
                         ),
                         "Phone Number : ${widget.student!.Number}"),
