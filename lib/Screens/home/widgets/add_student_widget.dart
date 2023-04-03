@@ -5,7 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:student_database_bloc/bloc/student_bloc.dart';
 import 'package:student_database_bloc/db/model/data_model.dart';
 
-
 class AddStudentWidget extends StatefulWidget {
   const AddStudentWidget({super.key});
 
@@ -14,7 +13,6 @@ class AddStudentWidget extends StatefulWidget {
 }
 
 class _AddStudentWidgetState extends State<AddStudentWidget> {
-  String? path;
   final _namecontroller = TextEditingController();
 
   final _agecontroller = TextEditingController();
@@ -23,7 +21,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
 
   final _phonenumcontroller = TextEditingController();
 
-   ValueNotifier _stringnofitier = ValueNotifier('');
+  ValueNotifier _stringnofitier = ValueNotifier("assets/assets/person-4.png");
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +34,17 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CircleAvatar(
-                backgroundColor: Colors.grey.shade400,
-                // backgroundImage: AssetImage('assets\person-4.png'),
-                radius: 100,
+              ValueListenableBuilder(
+                valueListenable: _stringnofitier,
+                builder: (context, imageString, child) {
+                  return CircleAvatar(
+                    backgroundColor: Colors.grey.shade400,
+                    backgroundImage: AssetImage(imageString),
+                    radius: 100,
+                  );
+                },
               ),
-             ValueListenableBuilder(
+              ValueListenableBuilder(
                 valueListenable: _stringnofitier,
                 builder: (context, path, child) {
                   return IconButton(
@@ -132,7 +135,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                           age: _agecontroller.text,
                           domain: _domaincontroller.text,
                           Number: _phonenumcontroller.text,
-                          image: path ?? "assets/assets/person-4.png")));
+                          image: _stringnofitier.value)));
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.add),

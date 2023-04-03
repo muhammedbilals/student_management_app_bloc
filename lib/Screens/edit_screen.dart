@@ -55,10 +55,8 @@ class _EditScreenState extends State<EditScreen> {
               const SizedBox(
                 height: 10,
               ),
-              ValueListenableBuilder(
-                valueListenable: _stringnofitier,
-                builder: (context, value, child) {
-                  return IconButton(
+             
+                   IconButton(
                       onPressed: () async {
                         var path;
                         final PickedFile = await ImagePicker()
@@ -66,12 +64,11 @@ class _EditScreenState extends State<EditScreen> {
                         if (PickedFile == null) {
                           return;
                         } else {
-                          value = PickedFile.path;
+                          _stringnofitier.value = PickedFile.path;
                         }
                       },
-                      icon: const Icon(Icons.camera));
-                },
-              ),
+                      icon: const Icon(Icons.camera)),
+              
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
@@ -136,22 +133,27 @@ class _EditScreenState extends State<EditScreen> {
               const SizedBox(
                 height: 10,
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  final _student = StudentModel(
-                      name: _nameController!.text,
-                      age: _ageController!.text,
-                      domain: _domainController!.text,
-                      Number: _phoneController!.text,
-                      // id: _key,
-                      image: path!);
-                  context
-                      .read<StudentBloc>()
-                      .add(UpdateSpecificData(_student, widget.index));
-                  Navigator.pop(context);
+              ValueListenableBuilder(
+                valueListenable: _stringnofitier,
+                builder: (context, value, child) {
+                  return ElevatedButton.icon(
+                    onPressed: () {
+                      final _student = StudentModel(
+                          name: _nameController!.text,
+                          age: _ageController!.text,
+                          domain: _domainController!.text,
+                          Number: _phoneController!.text,
+                          // id: _key,
+                          image:_stringnofitier.value);
+                      context
+                          .read<StudentBloc>()
+                          .add(UpdateSpecificData(_student, widget.index));
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.add),
+                    label: const Text('Edit Student'),
+                  );
                 },
-                icon: const Icon(Icons.add),
-                label: const Text('Edit Student'),
               ),
             ],
           ),

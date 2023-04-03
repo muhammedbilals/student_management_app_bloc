@@ -22,10 +22,10 @@ class ListStudentWidget extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 // final data = state[index];
                 return ListTile(
-                  
                   leading: CircleAvatar(
                     radius: 20,
-                    backgroundImage: FileImage(File(state.Students[index].image)),
+                    backgroundImage:
+                        FileImage(File(state.Students[index].image)),
                   ),
                   onTap: () {
                     Navigator.push(
@@ -64,12 +64,10 @@ class ListStudentWidget extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                                          context
-                                              .read<StudentBloc>()
-                                              .add(DeleteSpecificData(state.Students,index));
-                                              
-                                        },
-
+                          context
+                              .read<StudentBloc>()
+                              .add(DeleteSpecificData(state.Students, index));
+                        },
                         icon: const Icon(
                           Icons.delete,
                           color: Colors.red,
