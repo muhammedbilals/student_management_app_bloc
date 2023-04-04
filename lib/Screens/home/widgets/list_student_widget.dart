@@ -50,13 +50,14 @@ class ListStudentWidget extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => EditScreen(
-                                  index: index,
-                                  data: StudentModel(
-                                      name: state.Students[index].name,
-                                      age: state.Students[index].age,
-                                      domain: state.Students[index].domain,
-                                      Number: state.Students[index].Number,
-                                      image: state.Students[index].image)),
+                                index: index,
+                                data: StudentModel(
+                                    name: state.Students[index].name,
+                                    age: state.Students[index].age,
+                                    domain: state.Students[index].domain,
+                                    Number: state.Students[index].Number,
+                                    image: state.Students[index].image),
+                              ),
                             ),
                           );
                         },

@@ -21,7 +21,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
 
   final _phonenumcontroller = TextEditingController();
 
-  ValueNotifier _stringnofitier = ValueNotifier("assets/assets/person-4.png");
+  ValueNotifier _stringnofitier = ValueNotifier("assets/assets/person4.png");
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 builder: (context, imageString, child) {
                   return CircleAvatar(
                     backgroundColor: Colors.grey.shade400,
-                    backgroundImage: AssetImage(imageString),
+                    // backgroundImage: AssetImage(imageString),
                     radius: 100,
                   );
                 },
@@ -48,17 +48,18 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 valueListenable: _stringnofitier,
                 builder: (context, path, child) {
                   return IconButton(
-                      onPressed: () async {
-                        var path;
-                        final PickedFile = await ImagePicker()
-                            .pickImage(source: ImageSource.gallery);
-                        if (PickedFile == null) {
-                          return;
-                        } else {
-                          _stringnofitier.value = PickedFile.path;
-                        }
-                      },
-                      icon: const Icon(Icons.camera));
+                    onPressed: () async {
+                      var path;
+                      final PickedFile = await ImagePicker()
+                          .pickImage(source: ImageSource.gallery);
+                      if (PickedFile == null) {
+                        return;
+                      } else {
+                        _stringnofitier.value = PickedFile.path;
+                      }
+                    },
+                    icon: const Icon(Icons.camera),
+                  );
                 },
               ),
               TextFormField(
@@ -128,6 +129,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
               ElevatedButton.icon(
                 style: const ButtonStyle(),
                 onPressed: () {
+              
                   // onAddStudentButtonClicked();
                   BlocProvider.of<StudentBloc>(context).add(AddData(
                       StudentModel(

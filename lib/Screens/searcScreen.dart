@@ -69,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                         itemCount: displayStudent.length,
                       )
-                    : const Center(child: Text("The data is not Found")),
+                    : const Center(child: Text("Search Something!")),
               ),
             ],
           );
